@@ -24,9 +24,15 @@ const openApiSearch = async (text) => {
   return rsp.data.choices[0].text;
 };
 
+/**
+ * App
+ * SocketMode
+ */
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
+  appToken: process.env.SLACK_APP_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
+  socketMode: true,
 });
 
 app.event('app_mention', async ({ event, say }) => {
