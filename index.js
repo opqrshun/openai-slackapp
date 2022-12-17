@@ -45,9 +45,11 @@ const app = new App({
   stateSecret: 'my-state-secret',
   scopes: ['app_mentions:read', 'chat:write', 'im:write'],
   installationStore: new FileInstallationStore(),
+  redirectUri: `${process.env.HOST_URL}/slack/redirect`,
   installerOptions: {
     directInstall: true,
     legacyStateVerification: true,
+    redirectUriPath: '/slack/redirect',
   },
 });
 
