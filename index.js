@@ -1,7 +1,7 @@
 import SlackBot from '@slack/bolt';
 import dotenv from 'dotenv';
 import { Configuration, OpenAIApi } from 'openai';
-const { App } = SlackBot;
+const { App, FileInstallationStore } = SlackBot;
 
 dotenv.config();
 
@@ -41,6 +41,14 @@ const app = new App({
       },
     },
   ],
+  clientId: process.env.SLACK_CLIENT_ID,
+  clientSecret: process.env.SLACK_CLIENT_SECRET,
+  stateSecret: 'my-state-secret',
+  scopes: ['app_mentions:read', 'chat:write', 'im:write'],
+  installationStore: new FileInstallationStore(),
+  installerOptions: {
+    directInstall: true,
+  },
 });
 
 app.event('app_mention', async ({ event, say }) => {
