@@ -47,6 +47,7 @@ const app = new App({
   installationStore: new FileInstallationStore(),
   installerOptions: {
     directInstall: true,
+    legacyStateVerification: true,
   },
 });
 
