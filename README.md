@@ -1,17 +1,19 @@
-# slackgpt
 
+# Slack Configuration
 
-## Slack Configuration
+## Setting Event Subscriptions
 
-### Setting Socket Mode
-
-- Enable Socket Mode
+- 
 - Enable Events in Event Subscriptions
   - Add app_mention in Subscribe to bot events
   
 
-### Scopes in OAuth & Permissions
+## Scopes in OAuth & Permissions
 
+Redirect URL
+ - `https://{HOST_URL}/slack/redirect`
+
+Scopes
 - app_mentions:read
 - chat:write
 - im:write
@@ -20,11 +22,14 @@
 
 ## ENVIRONMENT
 
+.env
+
 ```
-OPENAI_API_KEY=
+HOST_URL = 
+OPENAI_API_KEY =
 SLACK_SIGNING_SECRET=
-SLACK_BOT_TOKEN=xoxb-
-SLACK_APP_TOKEN=xapp-
+SLACK_CLIENT_ID = 
+SLACK_CLIENT_SECRET =
 ```
 
 

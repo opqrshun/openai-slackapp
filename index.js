@@ -1,7 +1,7 @@
 import SlackBot from '@slack/bolt';
 import dotenv from 'dotenv';
 import { Configuration, OpenAIApi } from 'openai';
-const { App } = SlackBot;
+const { App, FileInstallationStore } = SlackBot;
 
 dotenv.config();
 
@@ -29,10 +29,7 @@ const openApiSearch = async (text) => {
  * SocketMode
  */
 const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  appToken: process.env.SLACK_APP_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
-  socketMode: true,
   customRoutes: [
     {
       path: '/health-check',
@@ -43,6 +40,17 @@ const app = new App({
       },
     },
   ],
+  clientId: process.env.SLACK_CLIENT_ID,
+  clientSecret: process.env.SLACK_CLIENT_SECRET,
+  stateSecret: 'my-state-secret',
+  scopes: ['app_mentions:read', 'chat:write', 'im:write'],
+  installationStore: new FileInstallationStore(),
+  redirectUri: `${process.env.HOST_URL}/slack/redirect`,
+  installerOptions: {
+    directInstall: true,
+    legacyStateVerification: true,
+    redirectUriPath: '/slack/redirect',
+  },
 });
 
 app.event('app_mention', async ({ event, say }) => {
