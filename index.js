@@ -46,7 +46,7 @@ const app = new App({
 app.event('app_mention', async ({ event, say }) => {
   try {
     let rsp = await openApiSearch(event.text);
-    await say(`<@${event.user}>: ${rsp}`);
+    await say({ text: `<@${event.user}>: ${rsp}`, thread_ts: event.thread_ts || event.ts });
   } catch (error) {
     console.error(error);
   }
